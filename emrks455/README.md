@@ -13,7 +13,7 @@ these commands work for linux and mac I think idk about windows. also chatgpt an
 2. Clone this repo
     git clone https://github.com/jbaremoney/emrks455/tree/5d448420e608d794406921029c0392a2c3c6d7c9/emrks455
 
-3. Navigate to repo cd emrs455
+3. Navigate to repo cd emrks455
 
 4. *** Navigate to client folder (where react stuff is, keeping front and backend separate) ... cd client ... this part is IMPORTANT because initialized separate package managers for front and backend
 
