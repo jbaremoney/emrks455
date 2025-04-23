@@ -30,7 +30,12 @@ app.use(express.json());
 
 // ✅ THIS is what connects the routes
 const patientRoutes = require('../api/patients/patientRoutes');
+const appointmentsRoutes = require('../api/appointments/appointmentsRoutes');
+const claimsRoutes = require('../api/claims/claimsRoutes');
+
 app.use('/api/patients', patientRoutes); // 👈 now this URL will work
+app.use('/api/appointments', appointmentsRoutes); // 👈 now this URL will work
+app.use('/api/claims', claimsRoutes);
 
 app.get('/', (req, res) => {
   res.send('Server is running');

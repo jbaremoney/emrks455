@@ -27,15 +27,8 @@
 // module.exports = pool;
 const path = require('path');
 const dotenvPath = path.resolve(__dirname, '../../.env');
-console.log('🌱 Loading .env from:', dotenvPath);
 require('dotenv').config({ path: dotenvPath });
 
-console.log('DB ENV in db.js:', {
-  host: process.env.DB_HOST,
-  user: process.env.DB_USER,
-  password: process.env.DB_PASSWORD,
-  database: process.env.DB_NAME
-});
 
 const mysql = require('mysql2/promise');
 
