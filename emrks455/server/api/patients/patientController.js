@@ -1,4 +1,4 @@
-const patientModel = require('./patientModel');
+const patientModel = require('./patientModel'); 
 
 // Get all patients
 exports.getAllPatients = async (req, res) => {
@@ -66,5 +66,16 @@ exports.deletePatient = async (req, res) => {
   } catch (err) {
     console.error('Error deleting patient:', err);
     res.status(500).json({ error: 'Failed to delete patient' });
+  }
+};
+
+exports.getPatientMedicalHistory = async (req, res) => {
+  try {
+    const { ssn } = req.params;
+    const history = await patientModel.getPatientMedicalHistory(ssn);
+    res.json(history);
+  } catch (err) {
+    console.error('Error fetching patient medical history:', err);
+    res.status(500).json({ error: 'Failed to fetch medical history' });
   }
 };

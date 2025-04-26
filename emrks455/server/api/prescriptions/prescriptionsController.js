@@ -13,7 +13,7 @@ exports.getPrescriptionById = async (req, res) => {
   }
 };
 
-// Create new prescription
+// Create new prescription 
 exports.createPrescription = async (req, res) => {
   try {
     const { drug, amount } = req.body;

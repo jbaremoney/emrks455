@@ -10,7 +10,7 @@ exports.getAppointmentsForPatient = async (req, res) => {
       res.status(500).json({ error: 'Failed to fetch patient appointments' });
     }
   };
-  
+   
   exports.getAppointmentsForDoctor = async (req, res) => {
     try {
       const { ssn } = req.params;

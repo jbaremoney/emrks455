@@ -1,6 +1,6 @@
 const doctorModel = require('./medicalModel');
 
-// Get all medical professionals
+// Get all medical professionals 
 exports.getAllDoctors = async (req, res) => {
   try {
     const doctors = await doctorModel.getAllDoctors();

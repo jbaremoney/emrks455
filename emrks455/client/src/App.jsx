@@ -35,12 +35,19 @@
 // export default App
 import React from 'react';
 import PatientList from './pages/PatientList';
+import TestAppointments from './pages/TestAppointments';
+import TestClaims from './pages/TestClaims';
+import TestLabs from './pages/TestLabs';
+import TestDoctors from './pages/TestDoctors';
+import TestNotes from './pages/TestNotes';
+import TestPrescriptions from './pages/TestPrescriptions';
+
 
 function App() {
   return (
     <div>
       <h1>EMRKS System</h1>
-      <PatientList />
+      <TestPrescriptions />
     </div>
   );
 }

@@ -1,5 +1,5 @@
 const allergyModel = require('./allergiesModel');
-
+ 
 exports.getAllergiesByPatient = async (req, res) => {
   const { ssn } = req.params;
   try {
@@ -25,7 +25,11 @@ exports.deleteAllergy = async (req, res) => {
   const { ssn, allergen } = req.params;
   try {
     await allergyModel.deleteAllergy(ssn, allergen);
-    res.json({ message: 'Allergy deleted' });
+    if (result.affectedRows > 0) {
+      res.json({ message: 'Allergy deleted successfully.' });
+    } else {
+      res.status(404).json({ message: 'Allergy not found.' });
+    }
   } catch (err) {
     res.status(500).json({ error: err.message });
   }

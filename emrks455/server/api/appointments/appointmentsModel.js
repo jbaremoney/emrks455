@@ -62,7 +62,7 @@ exports.createAppointmentWithSchedule = async (startTime, endTime, location, not
 exports.updateAppointment = async (id, startTime, endTime, location, notes) => {
   const [result] = await pool.query(
     'UPDATE Appointment SET start_time = ?, end_time = ?, location = ?, notes = ? WHERE id = ?',
-    [id, startTime, endTime, location, notes]
+    [startTime, endTime, location, notes, id]
   );
   return result;
 };

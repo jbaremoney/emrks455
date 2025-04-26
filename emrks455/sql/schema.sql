@@ -115,14 +115,14 @@ CREATE TABLE Claim (
     FOREIGN KEY (medical_ssn) REFERENCES MedicalProfessional(ssn) ON DELETE CASCADE
 );
 
-CREATE VIEW PatientMedicalHistory AS
-SELECT p.ssn AS patient_ssn, lt.id AS test_id, a.id AS appointment_id,
-       pr.id AS prescription_id, an.id AS admin_note_id
-FROM Patient p
-LEFT JOIN Give_Result gr ON p.ssn = gr.patient_ssn
-LEFT JOIN LabTest lt ON gr.test_id = lt.id
-LEFT JOIN Schedule_Appointment sa ON p.ssn = sa.patient_ssn
-LEFT JOIN Appointment a ON sa.appointment_id = a.id
-LEFT JOIN Order_Prescription op ON p.ssn = op.patient_ssn
-LEFT JOIN Prescription pr ON op.prescription_id = pr.id
-LEFT JOIN AdminNote an ON p.ssn = an.patient_ssn;
+-- CREATE VIEW PatientMedicalHistory AS
+-- SELECT p.ssn AS patient_ssn, lt.id AS test_id, a.id AS appointment_id,
+--        pr.id AS prescription_id, an.id AS admin_note_id
+-- FROM Patient p
+-- LEFT JOIN Give_Result gr ON p.ssn = gr.patient_ssn
+-- LEFT JOIN LabTest lt ON gr.test_id = lt.id
+-- LEFT JOIN Schedule_Appointment sa ON p.ssn = sa.patient_ssn
+-- LEFT JOIN Appointment a ON sa.appointment_id = a.id
+-- LEFT JOIN Order_Prescription op ON p.ssn = op.patient_ssn
+-- LEFT JOIN Prescription pr ON op.prescription_id = pr.id
+-- LEFT JOIN AdminNote an ON p.ssn = an.patient_ssn;
