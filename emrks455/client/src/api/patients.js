@@ -1,6 +1,7 @@
 import axios from 'axios';
 const BASE_URL = 'http://localhost:3000/api/patients'; 
 
+export const authPatient = (username, password) => axios.post(`${BASE_URL}/auth`,{username, password})
 export const getAllPatients = () => axios.get(`${BASE_URL}`);
 export const getPatientBySSN = (ssn) => axios.get(`${BASE_URL}/${ssn}`);
 export const createPatient = (ssn, name, address, insurance) => axios.post(`${BASE_URL}`, { ssn, name, address, insurance });

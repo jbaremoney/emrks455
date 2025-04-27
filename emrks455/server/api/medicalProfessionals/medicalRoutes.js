@@ -14,4 +14,6 @@ router.delete('/:ssn', medicalController.deleteDoctor);
 // Get all appointments for a medical professional
 router.get('/:ssn/appointments', appointmentsController.getAppointmentsForDoctor);
 
+router.post('/auth', medicalController.authDoctor);
+
 module.exports = router;

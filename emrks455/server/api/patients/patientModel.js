@@ -6,6 +6,24 @@ exports.getAllPatients = async () => {
   return rows;
 };
 
+exports.authPatient = async (username, password) => {
+  try {
+    const [rows] = await pool.query(
+      'SELECT ssn FROM Patient WHERE username = ? AND password = ?',
+      [username, password]
+    );
+
+    if (rows.length !== 0) {
+      return rows[0].ssn;
+    } else {
+      return 0;
+    }
+  } catch (err) {
+    console.error('Error authenticating patient:', err);
+    throw err;
+  }
+};
+
 // Get patient by SSN
 exports.getPatientBySSN = async (ssn) => {
   const [rows] = await pool.query('SELECT * FROM Patient WHERE ssn = ?', [ssn]);

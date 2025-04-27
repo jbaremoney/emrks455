@@ -6,7 +6,9 @@ CREATE TABLE MedicalProfessional (
     ssn CHAR(9) PRIMARY KEY NOT NULL,
     name VARCHAR(255) NOT NULL,
     specialty VARCHAR(255),
-    address VARCHAR(255)
+    address VARCHAR(255),
+    email VARCHAR(255),
+    password VARCHAR(255)
 );
 
 -- Patient Table
@@ -14,7 +16,9 @@ CREATE TABLE Patient (
     ssn CHAR(9) PRIMARY KEY NOT NULL,
     name VARCHAR(255) NOT NULL,
     address VARCHAR(255),
-    insurance VARCHAR(255)
+    insurance VARCHAR(255),
+    email VARCHAR(255),
+    password VARCHAR(255)
 );
 
 -- Allergy Table (Many-to-One with Patient)

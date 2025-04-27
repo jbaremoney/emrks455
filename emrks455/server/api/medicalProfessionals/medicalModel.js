@@ -6,6 +6,24 @@ exports.getAllDoctors = async () => {
   return rows;
 };
 
+exports.authDoctor = async (username, password) => {
+  try {
+    const [rows] = await pool.query(
+      'SELECT ssn FROM MedicalProffesional WHERE username = ? AND password = ?',
+      [username, password]
+    );
+
+    if (rows.length !== 0) {
+      return rows[0].ssn;
+    } else {
+      return 0;
+    }
+  } catch (err) {
+    console.error('Error authenticating professional:', err);
+    throw err;
+  }
+};
+
 // Get specific medical professional by SSN
 exports.getDoctorBySSN = async (ssn) => {
   const [rows] = await pool.query('SELECT * FROM MedicalProfessional WHERE ssn = ?', [ssn]);

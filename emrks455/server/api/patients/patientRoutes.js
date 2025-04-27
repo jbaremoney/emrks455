@@ -26,6 +26,6 @@ router.get('/:ssn/labs', labsController.getLabsByPatientSSN);
 router.get('/:ssn/notes', notesController.getNotesByPatientSSN);
 router.get('/:ssn/prescriptions', prescriptionsController.getPrescriptionsByPatient);
 
- 
+ router.post('/auth', patientController.authPatient);
 
 module.exports = router;

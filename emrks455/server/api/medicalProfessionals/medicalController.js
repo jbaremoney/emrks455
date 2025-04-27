@@ -10,6 +10,22 @@ exports.getAllDoctors = async (req, res) => {
     res.status(500).json({ error: 'Failed to fetch medical professionals' });
   }
 };
+exports.authDoctor = async (req, res) => {
+  try {
+    const { username, password } = req.body;
+
+    const authResp = await patientModel.authDoctor(username, password);
+
+    if (authResp !== 0) {
+      res.status(200).json({ ssn: authResp });
+    } else {
+      res.status(401).json({ error: 'Invalid username or password' });
+    }
+  } catch (err) {
+    console.error('Error in authDoctor controller:', err);
+    res.status(500).json({ error: 'Problem validating Doctor' });
+  }
+};
 
 // Get specific medical professional
 exports.getDoctorBySSN = async (req, res) => {
