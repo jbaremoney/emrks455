@@ -39,18 +39,6 @@ h2 {
   color: #27272b;
 }
 
-.fixed-button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  color: #ffffff;
-  background-color: #1a1a1a;
-  cursor: pointer;
-  transition: border-color 0.25s;
-}
 
 button {
   border-radius: 8px;
@@ -94,14 +82,15 @@ button:focus-visible {
 #sidebar {
   display: flex;
   height: 100vh;
-  width: 250px;
+  width: 220px;
   justify-content: left;
   align-items: left;
-  background-color: #b8bfc4;
+  background-color: #aab0b4;
   position: relative;
   z-index: 1;
-  box-shadow: 8px 0px 10px rgb(70, 69, 69);
+  box-shadow: 3px 0px 10px rgb(62, 61, 61);
 }
+
 
 .textfield {
   color: #000000;
@@ -116,4 +105,17 @@ button:focus-visible {
   border-radius: 15px;
   box-shadow: 4px 4px 10px black;
   padding: 30px 15px 70px 15px;
+}
+
+.fixed-button {
+  border-radius: 8px;
+  border: 1px solid transparent;
+  padding: 0.6em 1.2em;
+  font-size: 1em;
+  font-weight: 500;
+  font-family: inherit;
+  color: #ffffff;
+  background-color: #27272b;
+  cursor: pointer;
+  transition: border-color 0.25s;
 }

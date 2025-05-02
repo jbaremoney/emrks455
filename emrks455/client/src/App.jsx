@@ -42,13 +42,15 @@ import TestDoctors from './pages/TestDoctors';
 import TestNotes from './pages/TestNotes';
 import TestPrescriptions from './pages/TestPrescriptions';
 import LoginPage from './pages/LoginPage'
+import CreateAccountPage from './pages/CreateAccountPage';
 import HomePage from './pages/HomePage'
+
 
 function App() {
   return (
-    <div >
+    <div>
       <h1>EMRKS System</h1>
-      <HomePage />
+      <CreateAccountPage />
     </div>
   );
 }

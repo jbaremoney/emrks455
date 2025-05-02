@@ -50,6 +50,15 @@ function LoginPage() {
             style={{ marginBottom: '10px', padding: '8px' }}
           />
           <button class="fixed-button" type="submit" style={{ padding: '10px', borderRadius: '25px' }}>Login</button>
+          {role === 'patient' && (
+            <div style={{ marginTop: '30px', textAlign: 'center' }}>
+              <hr></hr>
+              <span style={{ color: "#27272b"}}>Don't have an account? </span>
+              <a style={{ color: '#0077cc', textDecoration: 'underline', cursor: 'pointer' }}>
+                Create one here
+              </a>
+            </div>
+          )}
         </form>
       )}
     </div>
@@ -57,11 +66,3 @@ function LoginPage() {
 }
 
 export default LoginPage;
-
-
-
-  /* NOTES -- 
-  login as patient or doctor -- either have two buttons one for doctor one for patient or ask first
-
-
-  */
