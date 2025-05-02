@@ -91,6 +91,18 @@ button:focus-visible {
   border-color: #ffffff;
 }
 
+#sidebar {
+  display: flex;
+  height: 100vh;
+  width: 250px;
+  justify-content: left;
+  align-items: left;
+  background-color: #b8bfc4;
+  position: relative;
+  z-index: 1;
+  box-shadow: 8px 0px 10px rgb(70, 69, 69);
+}
+
 .textfield {
   color: #000000;
   background-color: #cecdcd;
