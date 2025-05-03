@@ -120,3 +120,18 @@ button:focus-visible {
   cursor: pointer;
   transition: border-color 0.25s;
 }
+
+.search-bar {
+  width: 400px; 
+  margin-left: 20px;
+  padding: 3px 3px 3px 8px;
+  background-Color: lightblue;
+  border: white solid;
+  border-Radius: 20px;
+  color: black;
+}
+
+.search-bar::placeholder {
+  color: white;
+  opacity: 75%;
+}

@@ -1,4 +1,5 @@
 import React from 'react';
+import { useState } from 'react';
 import { Calendar, dateFnsLocalizer } from 'react-big-calendar';
 import format from 'date-fns/format';
 import parse from 'date-fns/parse';
@@ -32,8 +33,13 @@ const events = [
   },
 ];
 
+const patientResults = ['Alice', 'Bob', 'Charlie', 'Diana'];
+const doctorResults = ['Poop', 'Fart', 'Charlie', 'Diana']
+
 function HomePage() {
   const { user } = useAuth();
+  const [showResults, setShowResults] = useState(false);
+
   return (
     <div style={{ display: 'flex', height: '100vh', width: '100vw' }}>
       <div id="sidebar" >
@@ -46,11 +52,44 @@ function HomePage() {
         <button className="fixed-button" type="submit" style={{ marginTop: '5px', marginLeft:'10px', padding: '5px', borderRadius: '8px', width:'200px' }}> Prescriptions </button>
       </div>
 
-      <div style={{flex: 1, backgroundColor: 'lightblue', padding: '20px', overflowY: 'auto' }}>
-        <input style={{width:'400px', backgroundColor:'lightblue', border:'white solid', borderRadius:'20px', paddingLeft:'8px', color:'black'}}
-          placeholder='Search'
+      <div style={{ flex: 1, padding: '20px', backgroundColor: 'lightblue', position: 'relative' }}>
+        <input
+          className="search-bar"
+          placeholder="Search"
+          onFocus={() => setShowResults(true)}
+          onBlur={() => setTimeout(() => setShowResults(false), 100)}
         />
-        <h1 style={{ padding: "0 0 0 20px",color: '#27272b' }}>Calendar</h1>
+
+        {showResults && (
+          <div
+            style={{
+              position: 'absolute',
+              marginLeft: '25px',
+              top: '60px',
+              width: '400px',
+              backgroundColor: 'white',
+              border: '1px solid #ccc',
+              borderRadius: '6px',
+              boxShadow: '0 4px 8px rgba(0,0,0,0.1)',
+              zIndex: 1,
+            }}
+          >
+            {results.map((name, index) => (
+              <div
+                key={index}
+                style={{
+                  padding: '8px',
+                  borderBottom: '1px solid #eee',
+                  cursor: 'pointer'
+                }}
+              >
+                {name}
+              </div>
+            ))}
+          </div>
+        )}
+
+        <h1 style={{ paddingTop: '40px', color: '#27272b' }}>Calendar</h1>
         <Calendar
           localizer={localizer}
           events={events}
@@ -58,12 +97,17 @@ function HomePage() {
           endAccessor="end"
           views={['week']}
           defaultView="week"
-          toolbar = {false}
-          style={{ height: 600, margin: '10px 10px 10px 20px', backgroundColor: 'white', color:"gray", borderRadius: '8px' }}
+          toolbar={false}
+          style={{
+            height: 600,
+            margin: '10px 0',
+            backgroundColor: 'white',
+            color: 'gray',
+            borderRadius: '8px',
+          }}
         />
       </div>
     </div>
   );
 }
-
 export default HomePage;

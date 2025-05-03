@@ -31,7 +31,7 @@ function CreateAccountPage() {
             <input className='textfield'
                 type="text"
                 value={insurance}
-                onChange={(e) => setPassword(e.target.value)}
+                onChange={(e) => setInsurance(e.target.value)}
                 required
                 style={{ marginBottom: '10px', padding: '8px' }}
             />
@@ -39,7 +39,7 @@ function CreateAccountPage() {
             <input className='textfield'
                 type="text"
                 value={address}
-                onChange={(e) => setPassword(e.target.value)}
+                onChange={(e) => setAddress(e.target.value)}
                 required
                 style={{ marginBottom: '10px', padding: '8px' }}
             />
