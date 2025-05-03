@@ -81,6 +81,7 @@ button:focus-visible {
 
 #sidebar {
   display: flex;
+  flex-direction: column;
   height: 100vh;
   width: 220px;
   justify-content: left;

@@ -50,7 +50,7 @@ function App() {
   return (
     <div>
       <h1>EMRKS System</h1>
-      <CreateAccountPage />
+      <HomePage />
     </div>
   );
 }

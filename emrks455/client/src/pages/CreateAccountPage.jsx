@@ -3,12 +3,12 @@ import React, { useState } from 'react';
 function CreateAccountPage() {
     const [name, setName] = useState('');
     const [ssn, setSsn] = useState('');
-    const [username, setUsername] = useState('');
+    const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
   
     const handleCreateAccount = (e) => {
       e.preventDefault();
-      console.log('Creating account with:', { username, password });
+      console.log('Creating account with:', { email, password });
       // TODO: Send POST request to backend to create the account
     };
     return (
@@ -33,11 +33,11 @@ function CreateAccountPage() {
                 required
                 style={{ marginBottom: '10px', padding: '8px' }}
             />
-            <p style={{ color: '#27272b', margin: '0px'}}>Username:</p>
+            <p style={{ color: '#27272b', margin: '0px'}}>Email:</p>
             <input className='textfield'
                 type="text"
-                value={username}
-                onChange={(e) => setUsername(e.target.value)}
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
                 required
                 style={{ marginBottom: '10px', padding: '8px' }}
             />

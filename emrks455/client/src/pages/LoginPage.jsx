@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 
 function LoginPage() {
   const [role, setRole] = useState('');       // 'doctor' or 'patient'
-  const [username, setUsername] = useState('');
+  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
   const handleRoleSelection = (selectedRole) => {
@@ -12,7 +12,7 @@ function LoginPage() {
   const handleLogin = (e) => {
     e.preventDefault(); // prevents page reload
     console.log('Role:', role);
-    console.log('Username:', username);
+    console.log('Email:', email);
     console.log('Password:', password);
     // Later: send this to the backend
   };
@@ -35,9 +35,9 @@ function LoginPage() {
           <h2 style={{textAlign: 'center'}}>Login as {role.charAt(0).toUpperCase() + role.slice(1)}</h2> {/* Capitalize first letter */}
           <input class='textfield'
             type="text"
-            placeholder="Username"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
+            placeholder="Email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
             required
             style={{ marginBottom: '10px', padding: '8px' }}
           />
