@@ -13,14 +13,14 @@ exports.getAllPatients = async (req, res) => {
 
 exports.authPatient = async (req, res) => {
   try {
-    const { username, password } = req.body;
+    const { email, password } = req.body;
 
-    const authResp = await patientModel.authPatient(username, password);
+    const authResp = await patientModel.authPatient(email, password);
 
     if (authResp !== 0) {
       res.status(200).json({ ssn: authResp });
     } else {
-      res.status(401).json({ error: 'Invalid username or password' });
+      res.status(401).json({ error: 'Invalid email or password' });
     }
   } catch (err) {
     console.error('Error in authPatient controller:', err);

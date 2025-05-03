@@ -6,6 +6,8 @@ import startOfWeek from 'date-fns/startOfWeek';
 import getDay from 'date-fns/getDay';
 import enUS from 'date-fns/locale/en-US'; 
 import 'react-big-calendar/lib/css/react-big-calendar.css';
+import { useAuth } from './AuthContext'; // adjust path as needed
+
 
 const locales = {
   'en-US': enUS,
@@ -28,6 +30,7 @@ const events = [
 ];
 
 function HomePage() {
+  const { user } = useAuth();
   return (
     <div style={{ display: 'flex', height: '100vh', width: '100vw' }}>
       <div id="sidebar" >

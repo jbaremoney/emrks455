@@ -6,11 +6,11 @@ exports.getAllDoctors = async () => {
   return rows;
 };
 
-exports.authDoctor = async (username, password) => {
+exports.authDoctor = async (email, password) => {
   try {
     const [rows] = await pool.query(
-      'SELECT ssn FROM MedicalProffesional WHERE username = ? AND password = ?',
-      [username, password]
+      'SELECT ssn FROM MedicalProfessional WHERE email = ? AND password = ?',
+      [email, password]
     );
 
     if (rows.length !== 0) {

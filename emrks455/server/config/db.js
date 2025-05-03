@@ -26,7 +26,7 @@
 
 // module.exports = pool;
 const path = require('path');
-const dotenvPath = path.resolve(__dirname, '../../.env');
+const dotenvPath = path.resolve(__dirname, '../.env');
 require('dotenv').config({ path: dotenvPath });
 
 
@@ -40,6 +40,13 @@ const pool = mysql.createPool({
   waitForConnections: true,
   connectionLimit: 10,
   queueLimit: 0
+});
+
+console.log("DB config:", {
+  host: process.env.DB_HOST,
+  user: process.env.DB_USER,
+  password: process.env.DB_PASSWORD,
+  database: process.env.DB_NAME
 });
 
 module.exports = pool;

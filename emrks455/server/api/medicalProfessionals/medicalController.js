@@ -12,9 +12,9 @@ exports.getAllDoctors = async (req, res) => {
 };
 exports.authDoctor = async (req, res) => {
   try {
-    const { username, password } = req.body;
+    const { email, password } = req.body;
 
-    const authResp = await patientModel.authDoctor(username, password);
+    const authResp = await doctorModel.authDoctor(email, password);
 
     if (authResp !== 0) {
       res.status(200).json({ ssn: authResp });

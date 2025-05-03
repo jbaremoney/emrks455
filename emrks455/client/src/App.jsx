@@ -45,13 +45,21 @@ import LoginPage from './pages/LoginPage'
 import CreateAccountPage from './pages/CreateAccountPage';
 import HomePage from './pages/HomePage'
 
+import ReactDOM from "react-dom/client";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { AuthProvider } from './pages/AuthContext.jsx';
 
 function App() {
   return (
-    <div>
-      <h1>EMRKS System</h1>
-      <CreateAccountPage />
-    </div>
+    <AuthProvider>
+      <Router>
+        <Routes>
+          <Route path="/" element={<LoginPage />} />
+          <Route path="/home" element={<HomePage />} />
+          <Route path="/create-account" element={<CreateAccountPage />} />
+        </Routes>
+      </Router>
+    </AuthProvider>
   );
 }
 

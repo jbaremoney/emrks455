@@ -1,19 +1,48 @@
 import React, { useState } from 'react';
+import { authDoctor } from '../api/medicalProffesional';
+import { authPatient } from '../api/patients';
+import { useAuth } from './AuthContext.jsx';
+import { useNavigate } from 'react-router-dom';
 
 function LoginPage() {
+  const { login } = useAuth();
+  const navigate = useNavigate();
+
   const [role, setRole] = useState('');       // 'doctor' or 'patient'
-  const [username, setUsername] = useState('');
+  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
   const handleRoleSelection = (selectedRole) => {
     setRole(selectedRole);
   };
 
-  const handleLogin = (e) => {
+  const handleLogin = async(e) => {
     e.preventDefault(); // prevents page reload
     console.log('Role:', role);
-    console.log('Username:', username);
+    console.log('Email:', email);
     console.log('Password:', password);
+
+    if (role === "doctor") {
+      try {
+        const res = await authDoctor(email, password);
+        login(res.data.ssn, 'doctor');
+        console.log(res);
+        navigate('/home');
+      } catch (err) {
+        console.error('Error getting appointment:', err);
+      }
+    }
+
+    if (role === "patient") {
+      try {
+        const res = await authPatient(email, password);
+        login(res.data.ssn, 'patient');
+        console.log(res);
+        navigate('/home');
+      } catch (err) {
+        console.error('Error getting appointment:', err);
+      }
+    }
     // Later: send this to the backend
   };
 
@@ -35,9 +64,9 @@ function LoginPage() {
           <h2 style={{textAlign: 'center'}}>Login as {role.charAt(0).toUpperCase() + role.slice(1)}</h2> {/* Capitalize first letter */}
           <input class='textfield'
             type="text"
-            placeholder="Username"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
+            placeholder="Email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
             required
             style={{ marginBottom: '10px', padding: '8px' }}
           />
@@ -54,7 +83,7 @@ function LoginPage() {
             <div style={{ marginTop: '30px', textAlign: 'center' }}>
               <hr></hr>
               <span style={{ color: "#27272b"}}>Don't have an account? </span>
-              <a style={{ color: '#0077cc', textDecoration: 'underline', cursor: 'pointer' }}>
+              <a onClick={() => navigate('/create-account')} style={{ color: '#0077cc', textDecoration: 'underline', cursor: 'pointer' }}>
                 Create one here
               </a>
             </div>

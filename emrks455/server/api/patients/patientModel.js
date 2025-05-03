@@ -6,11 +6,11 @@ exports.getAllPatients = async () => {
   return rows;
 };
 
-exports.authPatient = async (username, password) => {
+exports.authPatient = async (email, password) => {
   try {
     const [rows] = await pool.query(
-      'SELECT ssn FROM Patient WHERE username = ? AND password = ?',
-      [username, password]
+      'SELECT ssn FROM Patient WHERE email = ? AND password = ?',
+      [email, password]
     );
 
     if (rows.length !== 0) {
