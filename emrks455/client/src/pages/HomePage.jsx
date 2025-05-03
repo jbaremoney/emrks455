@@ -23,6 +23,9 @@ const localizer = dateFnsLocalizer({
   locales,
 });
 
+const patientResults = ['Alice', 'Bob', 'Charlie', 'Diana'];
+const doctorResults = ['Poop', 'Fart', 'Charlie', 'Diana']
+
 function HomePage() {
   const { user } = useAuth();
   const [patient, setPatient] = useState(null);
@@ -53,6 +56,8 @@ function HomePage() {
 
     fetchData();
   }, [user]);
+
+  const [showResults, setShowResults] = useState(false);
 
   return (
     <>
@@ -133,5 +138,4 @@ function HomePage() {
     </>
   );
 }
-
 export default HomePage;
