@@ -44,6 +44,9 @@ function HomePage() {
       </div>
 
       <div style={{flex: 1, backgroundColor: 'lightblue', padding: '20px', overflowY: 'auto' }}>
+        <input style={{width:'400px', backgroundColor:'lightblue', border:'white solid', borderRadius:'20px', paddingLeft:'8px', color:'black'}}
+          placeholder='Search'
+        />
         <h1 style={{ padding: "0 0 0 20px",color: '#27272b' }}>Calendar</h1>
         <Calendar
           localizer={localizer}
