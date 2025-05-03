@@ -31,18 +31,18 @@ exports.getPatientBySSN = async (ssn) => {
 };
 
 // Create a new patient
-exports.createPatient = async (ssn, name, address, insurance) => {
+exports.createPatient = async (ssn, name, address, insurance, email, password) => {
   await pool.query(
-    'INSERT INTO Patient (ssn, name, address, insurance) VALUES (?, ?, ?, ?)',
-    [ssn, name, address, insurance]
+    'INSERT INTO Patient (ssn, name, address, insurance, email, password) VALUES (?, ?, ?, ?, ?, ?)',
+    [ssn, name, address, insurance, email, password]
   );
 };
 
 // Update patient info
-exports.updatePatient = async (ssn, name, address, insurance) => {
+exports.updatePatient = async (ssn, name, address, insurance, email, password) => {
   const [result] = await pool.query(
-    'UPDATE Patient SET name = ?, address = ?, insurance = ? WHERE ssn = ?',
-    [name, address, insurance, ssn]
+    'UPDATE Patient SET name = ?, address = ?, insurance = ?, email = ?, password = ? WHERE ssn = ?',
+    [name, address, insurance, email, password, ssn]
   );
   return result;
 };

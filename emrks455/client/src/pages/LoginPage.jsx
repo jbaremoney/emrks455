@@ -26,7 +26,6 @@ function LoginPage() {
       try {
         const res = await authDoctor(email, password);
         login(res.data.ssn, 'doctor');
-        console.log(res);
         navigate('/home');
       } catch (err) {
         console.error('Error getting appointment:', err);
@@ -37,7 +36,6 @@ function LoginPage() {
       try {
         const res = await authPatient(email, password);
         login(res.data.ssn, 'patient');
-        console.log(res);
         navigate('/home');
       } catch (err) {
         console.error('Error getting appointment:', err);

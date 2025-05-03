@@ -1,4 +1,7 @@
 import React, { useState } from 'react';
+import { createPatient } from '../api/patients'
+import { useNavigate } from 'react-router-dom';
+
 
 function CreateAccountPage() {
     const [name, setName] = useState('');
@@ -7,11 +10,14 @@ function CreateAccountPage() {
     const [password, setPassword] = useState('');
     const [insurance, setInsurance] = useState('');
     const [address, setAddress] = useState('')
+    const navigate = useNavigate();
 
   
-    const handleCreateAccount = (e) => {
+    const handleCreateAccount = async(e) => {
       e.preventDefault();
       console.log('Creating account with:', { email, password });
+      const res = await createPatient(ssn, name, address, insurance, email, password)
+      navigate('/');
       // TODO: Send POST request to backend to create the account
     };
     return (
@@ -31,7 +37,7 @@ function CreateAccountPage() {
             <input className='textfield'
                 type="text"
                 value={insurance}
-                onChange={(e) => setPassword(e.target.value)}
+                onChange={(e) => setInsurance(e.target.value)}
                 required
                 style={{ marginBottom: '10px', padding: '8px' }}
             />
@@ -39,7 +45,7 @@ function CreateAccountPage() {
             <input className='textfield'
                 type="text"
                 value={address}
-                onChange={(e) => setPassword(e.target.value)}
+                onChange={(e) => setAddress(e.target.value)}
                 required
                 style={{ marginBottom: '10px', padding: '8px' }}
             />

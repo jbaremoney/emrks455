@@ -46,8 +46,8 @@ exports.getPatientBySSN = async (req, res) => {
 // Create a new patient
 exports.createPatient = async (req, res) => {
   try {
-    const { ssn, name, address, insurance } = req.body;
-    await patientModel.createPatient(ssn, name, address, insurance);
+    const { ssn, name, address, insurance, email, password } = req.body;
+    await patientModel.createPatient(ssn, name, address, insurance, email, password);
     res.status(201).json({ message: 'Patient created successfully' });
   } catch (err) {
     console.error('Error creating patient:', err);
@@ -59,8 +59,8 @@ exports.createPatient = async (req, res) => {
 exports.updatePatient = async (req, res) => {
   try {
     const { ssn } = req.params;
-    const { name, address, insurance } = req.body;
-    const updated = await patientModel.updatePatient(ssn, name, address, insurance);
+    const { name, address, insurance, email, password } = req.body;
+    const updated = await patientModel.updatePatient(ssn, name, address, insurance, email, password);
     if (updated.affectedRows === 0) {
       return res.status(404).json({ error: 'Patient not found' });
     }
