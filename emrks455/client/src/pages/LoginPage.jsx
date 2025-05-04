@@ -41,7 +41,6 @@ function LoginPage() {
         console.error('Error getting appointment:', err);
       }
     }
-    // Later: send this to the backend
   };
 
   return (
@@ -59,7 +58,7 @@ function LoginPage() {
         </div>
       ) : (
         <form class = 'wrapper' onSubmit={handleLogin} style={{ display: 'flex', flexDirection: 'column', width: '300px' }}>
-          <h2 style={{textAlign: 'center'}}>Login as {role.charAt(0).toUpperCase() + role.slice(1)}</h2> {/* Capitalize first letter */}
+          <h2 style={{textAlign: 'center'}}>Login as {role.charAt(0).toUpperCase() + role.slice(1)}</h2> 
           <input class='textfield'
             type="text"
             placeholder="Email"

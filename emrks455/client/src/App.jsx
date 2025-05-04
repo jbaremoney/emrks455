@@ -37,13 +37,14 @@ import React from 'react';
 import PatientList from './pages/PatientList';
 import TestAppointments from './pages/TestAppointments';
 import TestClaims from './pages/TestClaims';
-import TestLabs from './pages/TestLabs';
+// import TestLabs from './pages/TestLabs';
 import TestDoctors from './pages/TestDoctors';
 import TestNotes from './pages/TestNotes';
 import TestPrescriptions from './pages/TestPrescriptions';
 import LoginPage from './pages/LoginPage'
 import CreateAccountPage from './pages/CreateAccountPage';
-import HomePage from './pages/HomePage'
+import HomePage from './pages/HomePage';
+import LabTestsPage from './pages/LabTestsPage';
 
 import ReactDOM from "react-dom/client";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
@@ -57,6 +58,7 @@ function App() {
           <Route path="/" element={<LoginPage />} />
           <Route path="/home" element={<HomePage />} />
           <Route path="/create-account" element={<CreateAccountPage />} />
+          <Route path="/lab-tests" element={<LabTestsPage />} />
         </Routes>
       </Router>
     </AuthProvider>
