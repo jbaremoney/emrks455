@@ -84,9 +84,16 @@ exports.getPatientMedicalHistory = async (ssn) => {
       WHERE patient_ssn = ?
     `, [ssn]);
 
-    return { labs, appointments, prescriptions, notes };
+    const [allergies] = await conn.query(`
+      SELECT allergen
+      FROM allergy
+      WHERE patient_ssn = ?
+    `, [ssn]);
+
+    return { labs, appointments, prescriptions, notes, allergies };
 
   } finally {
     conn.release();
   }
 };
+

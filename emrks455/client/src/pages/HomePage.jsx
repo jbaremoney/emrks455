@@ -9,12 +9,13 @@ import 'react-big-calendar/lib/css/react-big-calendar.css';
 import { useNavigate } from 'react-router-dom';
 
 
-import { getPatientBySSN, getAppointmentsForPatient, getAllPatients, getMedicalHistoryBySSN } from '../api/patients';
+import { getPatientBySSN, getAppointmentsForPatient, getAllPatients, getMedicalHistoryBySSN, addAllergy } from '../api/patients';
 import { deleteAppointment, createAppointment } from '../api/appointments';
 import { getAllDoctors, getAppointmentsForDoctor, getDoctorsBySSN } from '../api/medicalProffesional';
 import { createClaim } from '../api/claims';
 import { createPrescription, assignPrescription } from '../api/prescriptions';
 import { createLab, assignLab } from '../api/labs';
+import { createNote } from '../api/notes';
 import MedicalHistoryPopup from './MedicalHistory';
 
 
@@ -70,6 +71,10 @@ function HomePage() {
   const [prescriptionForm, setPrescriptionForm] = useState({ drug: '', amount: '' });
   const [labResult, setLabResult] = useState('');
   const [medicalHistory, setMedicalHistory] = useState(null);
+  const [showNoteForm, setShowNoteForm] = useState(false);
+  const [showAllergyForm, setShowAllergyForm] = useState(false);
+  const [noteText, setNoteText] = useState('');
+  const [allergen, setAllergen] = useState('');
 
   
   const viewMedicalHistory = async (patientSSN) => {
@@ -172,6 +177,9 @@ function HomePage() {
             </button>
             <button onClick = {() => navigate("/prescriptions")} className="fixed-button" type="button" style={{ marginTop: '5px', marginLeft: '10px', padding: '5px', borderRadius: '8px', width: '200px' }}>
               Prescriptions
+            </button>
+            <button onClick = {() => navigate("/account")} className="fixed-button" type="button" style={{ marginTop: '5px', marginLeft: '10px', padding: '5px', borderRadius: '8px', width: '200px' }}>
+              Account
             </button>
           </div>
 
@@ -289,6 +297,8 @@ function HomePage() {
                     <button onClick={() => setShowClaimForm(true)}>Create Claim</button>
                     <button onClick={() => setShowPrescriptionForm(true)}>Create Prescription</button>
                     <button onClick={() => setShowLabForm(true)}>Create Lab Test</button>
+                    <button onClick={() => setShowNoteForm(true)}>Add Note</button>
+                    <button onClick={() => setShowAllergyForm(true)}>Add Allergy</button>
                     <button onClick={() => viewMedicalHistory(selectedPerson.ssn)} style={{ marginLeft: '10px' }}>
                       View Medical History
                     </button>                    
@@ -297,6 +307,7 @@ function HomePage() {
                 </div>
               </div>
             )}
+
             {showAppointmentForm && (
               <div style={overlayStyle}>
                 <div style={{ backgroundColor: '#fff', padding: '20px', border: '1px solid #ccc', borderRadius: '8px', minWidth: '400px' }}>
@@ -479,6 +490,56 @@ function HomePage() {
                 history={medicalHistory}
                 onClose={() => setMedicalHistory(null)}
               />
+            )}
+            {showNoteForm && (
+              <div style={overlayStyle}>
+                <div style={{ backgroundColor: '#fff', padding: '20px', borderRadius: '8px', minWidth: '400px' }}>
+                  <h3>Add Note for {selectedPerson.name}</h3>
+                  <textarea
+                    placeholder="Enter note"
+                    value={noteText}
+                    onChange={(e) => setNoteText(e.target.value)}
+                    style={{ width: '100%', height: '100px', marginBottom: '10px' }}
+                  />
+                  <button
+                    onClick={async () => {
+                      await createNote(selectedPerson.ssn, user.ssn, noteText);
+                      alert('Note added!');
+                      setShowNoteForm(false);
+                    }}
+                    style={{ marginRight: '10px' }}
+                  >
+                    Submit
+                  </button>
+                  <button onClick={() => setShowNoteForm(false)}>Cancel</button>
+                </div>
+              </div>
+            )}
+
+            {showAllergyForm && (
+              <div style={overlayStyle}>
+                <div style={{ backgroundColor: '#fff', padding: '20px', borderRadius: '8px', minWidth: '400px' }}>
+                  <h3>Add Allergy for {selectedPerson.name}</h3>
+                  <input
+                    type="text"
+                    placeholder="Enter allergen"
+                    value={allergen}
+                    onChange={(e) => setAllergen(e.target.value)}
+                    style={{ width: '100%', marginBottom: '10px' }}
+                  />
+                  <button
+                    onClick={async () => {
+                      await addAllergy(selectedPerson.ssn, allergen);
+                      alert('Allergy added!');
+                      setShowAllergyForm(false);
+                    }}
+                    style={{ marginRight: '10px' }}
+                  >
+                    Submit
+                  </button>
+                  <button onClick={() => setShowAllergyForm(false)}>Cancel</button>
+                </div>
+              </div>
             )}
 
           </div>

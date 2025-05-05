@@ -34,19 +34,13 @@
 
 // export default App
 import React from 'react';
-import PatientList from './pages/PatientList';
-import TestAppointments from './pages/TestAppointments';
-import TestClaims from './pages/TestClaims';
-// import TestLabs from './pages/TestLabs';
-import TestDoctors from './pages/TestDoctors';
-import TestNotes from './pages/TestNotes';
-import TestPrescriptions from './pages/TestPrescriptions';
 import LoginPage from './pages/LoginPage'
 import CreateAccountPage from './pages/CreateAccountPage';
 import HomePage from './pages/HomePage';
 import LabTestsPage from './pages/LabTestsPage';
 import ClaimsPage from './pages/ClaimsPage.jsx';
 import PrescriptionsPage from './pages/PrescriptionsPage.jsx';
+import AccountPage from './pages/AccountPage.jsx';
 
 import ReactDOM from "react-dom/client";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
@@ -63,6 +57,7 @@ function App() {
           <Route path="/lab-tests" element={<LabTestsPage />} />
           <Route path="/prescriptions" element={<PrescriptionsPage />} />
           <Route path="/claims" element={<ClaimsPage />} />
+          <Route path="/account" element={<AccountPage />} />
         </Routes>
       </Router>
     </AuthProvider>

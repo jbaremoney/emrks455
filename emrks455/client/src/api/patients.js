@@ -9,7 +9,7 @@ export const updatePatient = (ssn, name, address, insurance, email, password) =>
 export const deletePatient = (ssn) => axios.delete(`${BASE_URL}/${ssn}`);
 
 export const getAllergiesByPatient = (ssn) => axios.get(`${BASE_URL}/${ssn}/allergies`);
-export const addAllergy = (ssn, allergen) => axios.post(`${BASE_URL}/${ssn}/allergies`, allergen);
+export const addAllergy = (ssn, allergen) => axios.post(`${BASE_URL}/${ssn}/allergies`, {allergen});
 export const deleteAllergy = (ssn, allergen) => axios.delete(`${BASE_URL}/${ssn}/allergies/${allergen}`);
 
 export const getAppointmentsForPatient = (ssn) => axios.get(`${BASE_URL}/${ssn}/appointments`);

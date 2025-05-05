@@ -79,64 +79,71 @@ function LabTestsPage() {
             </button>
           </div>
           <div style={{ display: 'flex', flexDirection: 'column', backgroundColor: 'lightblue', flex: 1, padding: '20px', overflowY: 'auto' }}>
-            <input
-              className="search-bar"
-              placeholder="Search"
-              onFocus={() => setShowResults(true)}
-              onBlur={() => setTimeout(() => setShowResults(false), 150)}
-              value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
-              style={{
-                width: '400px',
-                backgroundColor: 'lightblue',
-                border: 'white solid',
-                borderRadius: '20px',
-                paddingLeft: '8px',
-                color: 'black',
-                margin: '20px'
-              }}
-            />
-            <h1 style={{ paddingTop: '40px', color: '#27272b' }}>Lab Tests</h1>
-
-            {showResults && user.role === 'doctor' && (
-              <div
+          
+          {user.role === 'doctor' && (
+            <>
+              <input
+                className="search-bar"
+                placeholder="Search for a patient"
+                onFocus={() => setShowResults(true)}
+                onBlur={() => setTimeout(() => setShowResults(false), 100)}
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
                 style={{
+                  width: '400px',
+                  backgroundColor: 'lightblue',
+                  border: 'white solid',
+                  borderRadius: '20px',
+                  paddingLeft: '8px',
+                  color: 'black',
+                  margin: '20px 0 0 20px'
+                }}
+              />
+              {showResults && (
+                <div style={{
                   position: 'absolute',
-                  marginLeft: '25px',
-                  top: '60px',
+                  left: '20px',
+                  top: '80px',
                   width: '400px',
                   backgroundColor: 'white',
                   border: '1px solid #ccc',
                   borderRadius: '6px',
                   boxShadow: '0 4px 8px rgba(0,0,0,0.1)',
                   zIndex: 1,
-                }}
-              >
-                {searchResults
-                  .filter((p) => p.name.toLowerCase().includes(searchTerm.toLowerCase()))
-                  .map((p, index) => (
-                    <div
-                      key={index}
-                      onMouseDown={() => {
-                        setSelectedPatient(p);
-                        setShowResults(false);
-                      }}
-                      style={{
-                        padding: '8px',
-                        borderBottom: '1px solid #eee',
-                        cursor: 'pointer',
-                      }}
-                    >
-                      {p.name} — {p.insurance}
-                    </div>
-                  ))}
-              </div>
-            )}
-            {!showResults && searchTerm.trim() === '' && (
-                <div style={{ marginTop: '10px', marginLeft: '25px', color: '#555' }}>
-                    <em>Search for a patient</em>
+                }}>
+                  {searchResults
+                    .filter(p => p.name.toLowerCase().includes(searchTerm.toLowerCase()))
+                    .map((p, index) => (
+                      <div
+                        key={index}
+                        onMouseDown={async () => {
+                          setSelectedPatient(p);
+                          const claimRes = await getClaimsByPatient(p.ssn);
+                          setClaims(claimRes.data);
+                          fetchClaims(p.ssn);
+                          setShowResults(false);
+                        }}
+                        style={{
+                          padding: '8px',
+                          borderBottom: '1px solid #eee',
+                          cursor: 'pointer'
+                        }}
+                      >
+                        {p.name} — {p.insurance}
+                      </div>
+                    ))}
                 </div>
-                )}
+              )}
+              
+              <h1 style={{ paddingTop: '40px', color: '#27272b' }}>Lab Test</h1>
+              {!showResults && searchTerm.trim() === '' && (
+                <div style={{ marginLeft: '20px', marginTop: '10px', color: '#555' }}>
+                  <em>Search for a patient</em>
+                </div>
+              )}
+            </>
+          )}
+          
             {user.role === 'doctor' && selectedPatient && (
               <div style={{ backgroundColor: 'white', padding: '20px', borderRadius: '8px', marginTop: '20px', width: '400px' }}>
                 <h3>Assign Lab to {selectedPatient.name}</h3>
@@ -156,6 +163,8 @@ function LabTestsPage() {
 
             {user.role === 'patient' && (
               <div style={{ paddingTop: '40px', color: '#27272b', paddingLeft: '20px' }}>
+               <h1 style={{ paddingTop: '40px', color: '#27272b' }}>Lab Test</h1>
+
                 <div style={{ marginTop: '20px' }}>
                   {labTests.length === 0 ? (
                     <p>No lab tests found.</p>
@@ -175,8 +184,8 @@ function LabTestsPage() {
                   )}
                 </div>
               </div>
+            
             )}
-
           </div>
         </div>
       ) : (

@@ -64,16 +64,6 @@ function ClaimsPage() {
     }
   };
 
-  const handleStatusUpdate = async (id, status) => {
-    try {
-      await updateClaimStatus(id, status);
-      const updatedClaims = await getClaimsByPatient(selectedPatient.ssn);
-      setClaims(updatedClaims.data);
-    } catch (err) {
-      console.error('Error updating status:', err);
-    }
-  };
-
   return (
     <>
       {user && person ? (
