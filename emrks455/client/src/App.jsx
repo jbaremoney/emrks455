@@ -45,6 +45,8 @@ import LoginPage from './pages/LoginPage'
 import CreateAccountPage from './pages/CreateAccountPage';
 import HomePage from './pages/HomePage';
 import LabTestsPage from './pages/LabTestsPage';
+import ClaimsPage from './pages/ClaimsPage.jsx';
+import PrescriptionsPage from './pages/PrescriptionsPage.jsx';
 
 import ReactDOM from "react-dom/client";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
@@ -59,6 +61,8 @@ function App() {
           <Route path="/home" element={<HomePage />} />
           <Route path="/create-account" element={<CreateAccountPage />} />
           <Route path="/lab-tests" element={<LabTestsPage />} />
+          <Route path="/prescriptions" element={<PrescriptionsPage />} />
+          <Route path="/claims" element={<ClaimsPage />} />
         </Routes>
       </Router>
     </AuthProvider>

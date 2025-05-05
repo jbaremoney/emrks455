@@ -6,6 +6,8 @@ import startOfWeek from 'date-fns/startOfWeek';
 import getDay from 'date-fns/getDay';
 import enUS from 'date-fns/locale/en-US';
 import 'react-big-calendar/lib/css/react-big-calendar.css';
+import { useNavigate } from 'react-router-dom';
+
 
 import { getPatientBySSN, getAppointmentsForPatient, getAllPatients, getMedicalHistoryBySSN } from '../api/patients';
 import { deleteAppointment, createAppointment } from '../api/appointments';
@@ -47,6 +49,7 @@ const overlayStyle = {
 
 function HomePage() {
   const { user } = useAuth();
+  const navigate = useNavigate();
   const [person, setPerson] = useState(null);
   const [appointments, setAppointments] = useState([]);
   const [selectedAppointment, setSelectedAppointment] = useState(null);
@@ -161,13 +164,13 @@ function HomePage() {
             <button className="fixed-button" type="button" style={{ marginTop: '60px', marginLeft: '10px', padding: '5px', borderRadius: '8px', width: '200px' }}>
               Home
             </button>
-            <button className="fixed-button" type="button" style={{ marginTop: '5px', marginLeft: '10px', padding: '5px', borderRadius: '8px', width: '200px' }}>
+            <button onClick = {() => navigate("/lab-tests")} className="fixed-button" type="button" style={{ marginTop: '5px', marginLeft: '10px', padding: '5px', borderRadius: '8px', width: '200px' }}>
               Lab Tests
             </button>
-            <button className="fixed-button" type="button" style={{ marginTop: '5px', marginLeft: '10px', padding: '5px', borderRadius: '8px', width: '200px' }}>
+            <button onClick = {() => navigate("/claims")} className="fixed-button" type="button" style={{ marginTop: '5px', marginLeft: '10px', padding: '5px', borderRadius: '8px', width: '200px' }}>
               Claims
             </button>
-            <button className="fixed-button" type="button" style={{ marginTop: '5px', marginLeft: '10px', padding: '5px', borderRadius: '8px', width: '200px' }}>
+            <button onClick = {() => navigate("/prescriptions")} className="fixed-button" type="button" style={{ marginTop: '5px', marginLeft: '10px', padding: '5px', borderRadius: '8px', width: '200px' }}>
               Prescriptions
             </button>
           </div>
