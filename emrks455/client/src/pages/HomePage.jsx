@@ -49,7 +49,7 @@ const overlayStyle = {
 
 
 function HomePage() {
-  const { user } = useAuth();
+  const { user, setUser  } = useAuth();
   const navigate = useNavigate();
   const [person, setPerson] = useState(null);
   const [appointments, setAppointments] = useState([]);
@@ -166,7 +166,7 @@ function HomePage() {
             </p>
 
 
-            <button className="fixed-button" type="button" style={{ marginTop: '60px', marginLeft: '10px', padding: '5px', borderRadius: '8px', width: '200px' }}>
+            <button className="fixed-button" type="button" style={{ backgroundColor: "grey", marginTop: '60px', marginLeft: '10px', padding: '5px', borderRadius: '8px', width: '200px' }}>
               Home
             </button>
             <button onClick = {() => navigate("/lab-tests")} className="fixed-button" type="button" style={{ marginTop: '5px', marginLeft: '10px', padding: '5px', borderRadius: '8px', width: '200px' }}>
@@ -178,9 +178,41 @@ function HomePage() {
             <button onClick = {() => navigate("/prescriptions")} className="fixed-button" type="button" style={{ marginTop: '5px', marginLeft: '10px', padding: '5px', borderRadius: '8px', width: '200px' }}>
               Prescriptions
             </button>
-            <button onClick = {() => navigate("/account")} className="fixed-button" type="button" style={{ marginTop: '5px', marginLeft: '10px', padding: '5px', borderRadius: '8px', width: '200px' }}>
-              Account
-            </button>
+            {user?.role === 'patient' && (
+              <button
+                onClick={() => navigate("/account")}
+                className="fixed-button"
+                type="button"
+                style={{
+                  marginTop: '5px',
+                  marginLeft: '10px',
+                  padding: '5px',
+                  borderRadius: '8px',
+                  width: '200px'
+                }}
+              >
+                Account
+              </button>
+            )}
+            <button
+                onClick={() => {
+                    setUser(null);       // Clear auth context
+                    navigate('/');       // Go to login page
+                }}
+                className="fixed-button"
+                type="button"
+                style={{
+                    backgroundColor: "red",
+                    marginTop: '300px',
+                    marginLeft: '10px',
+                    padding: '5px',
+                    borderRadius: '8px',
+                    width: '200px'
+                }}
+                >
+                Logout
+                </button>
+
           </div>
 
           <div style={{ flex: 1, padding: '20px', backgroundColor: 'lightblue', position: 'relative' }}>

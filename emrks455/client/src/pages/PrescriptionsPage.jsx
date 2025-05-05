@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from './AuthContext';
-import { getPatientBySSN, getPresctiptionsByPatient } from '../api/patients';
+import { getAllPatients, getPatientBySSN, getPresctiptionsByPatient } from '../api/patients';
 import { getDoctorsBySSN } from '../api/medicalProffesional';
-import { createPrescription, getPrescriptionById, updatePrescription } from '../api/prescriptions';
+import { createPrescription } from '../api/prescriptions';
 
 
 function PrescriptionsPage() {
   const navigate = useNavigate();
-  const { user } = useAuth();
+  const { user, setUser  } = useAuth();
   const [person, setPerson] = useState(null);
   const [showResults, setShowResults] = useState(false);
   const [searchTerm, setSearchTerm] = useState('');
@@ -87,12 +87,46 @@ function PrescriptionsPage() {
             <button onClick={() => navigate('/lab-tests')} className="fixed-button" style={{ marginTop: '5px', marginLeft: '10px', width: '200px' }}>
               Lab Tests
             </button>
-            <button className="fixed-button" style={{ marginTop: '5px', marginLeft: '10px', width: '200px' }}>
+            <button onClick={() => navigate("/claims")}className="fixed-button" style={{ marginTop: '5px', marginLeft: '10px', width: '200px' }}>
               Claims
             </button>
-            <button onClick={() => navigate("/prescriptions")} className="fixed-button" style={{ marginTop: '5px', marginLeft: '10px', width: '200px' }}>
+            <button  className="fixed-button" style={{ backgroundColor: "grey", marginTop: '5px', marginLeft: '10px', width: '200px' }}>
               Prescriptions
             </button>
+            {user?.role === 'patient' && (
+              <button
+                onClick={() => navigate("/account")}
+                className="fixed-button"
+                type="button"
+                style={{
+                  marginTop: '5px',
+                  marginLeft: '10px',
+                  padding: '5px',
+                  borderRadius: '8px',
+                  width: '200px'
+                }}
+              >
+                Account
+              </button>
+            )}
+            <button
+                onClick={() => {
+                    setUser(null);       // Clear auth context
+                    navigate('/');       // Go to login page
+                }}
+                className="fixed-button"
+                type="button"
+                style={{
+                    backgroundColor: "red",
+                    marginTop: '300px',
+                    marginLeft: '10px',
+                    padding: '5px',
+                    borderRadius: '8px',
+                    width: '200px'
+                }}
+                >
+                Logout
+                </button>
           </div>
 
           <div style={{ flex: 1, backgroundColor: 'lightblue', padding: '20px', position: 'relative' }}>
@@ -193,8 +227,8 @@ function PrescriptionsPage() {
                         patientPrescriptions.map((prescription) => (
                             <div key={prescription.id} style={{ marginBottom: '15px' }}>
                               <p><strong>ID:</strong> {prescription.id}</p>
-                              <p><strong>Name:</strong> {prescription.name}</p>
-                              <p><strong>Dose:</strong> {prescription.dose}</p>
+                              <p><strong>Name:</strong> {prescription.drug}</p>
+                              <p><strong>Dose:</strong> {prescription.amount}</p>
                               <p><strong>Date:</strong>{prescription.date}</p>
                             </div>
                         ))
