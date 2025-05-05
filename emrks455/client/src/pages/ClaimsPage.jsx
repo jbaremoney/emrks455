@@ -64,6 +64,8 @@ function ClaimsPage() {
     }
   };
 
+  
+
   return (
     <>
       {user && person ? (
